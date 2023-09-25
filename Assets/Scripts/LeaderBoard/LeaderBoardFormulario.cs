@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LeaderBoardFormulario : MonoBehaviour
 {
-    public TMP_Text playerId;
+    public TMP_InputField playerId;
     public TMP_InputField score;
-    public PlayerRequest playerRequest;
+    public LeaderBoardRequest leaderBoardRequest;
 
     public void CadastrarLeaderBoard()
     {
@@ -21,6 +21,6 @@ public class LeaderBoardFormulario : MonoBehaviour
         string json = JsonConvert.SerializeObject(leaderBoard);
 
         Debug.Log("Json: " + json);
-        playerRequest.SendPostRequest(json);
+        leaderBoardRequest.SendPostRequest(json);
     }
 }
