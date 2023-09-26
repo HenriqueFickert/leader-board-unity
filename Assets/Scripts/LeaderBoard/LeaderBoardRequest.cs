@@ -9,10 +9,57 @@ public class LeaderBoardRequest : MonoBehaviour
     protected string url = "http://localhost:3000/routes/leaderboard";
 
     private List<LeaderBoard> leaderBoards = new List<LeaderBoard>();
-
     public GameObject leaderBoardListPrefab;
     public Transform parentTransform;
     public List<GameObject> leaderBoardViewList = new();
+
+    private List<LeaderBoardPlayer> leaderBoardPlayers = new List<LeaderBoardPlayer>();
+    public GameObject leaderBoardPlayerListPrefab;
+    public Transform parentLeaderBoardPlayerTransform;
+    public List<GameObject> leaderBoardPlayerViewList = new();
+
+    public void SendGetAllLeaderBoardsPlayer(string complemento)
+    {
+        StartCoroutine(GetAllLeaderBoardsPlayer(complemento));
+    }
+
+    private IEnumerator GetAllLeaderBoardsPlayer(string complemento)
+    {
+        using (UnityWebRequest uwr = UnityWebRequest.Get(url + complemento))
+        {
+            yield return uwr.SendWebRequest();
+
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Erro na requisição: " + uwr.error);
+                Debug.Log("Detalhes do erro: " + uwr.downloadHandler.text);
+            }
+            else
+            {
+                Debug.Log("Resposta da API: " + uwr.downloadHandler.text);
+                List<LeaderBoardPlayer> leaderBoards = JsonConvert.DeserializeObject<List<LeaderBoardPlayer>>(uwr.downloadHandler.text);
+                ClearListLeaderBoardsPlayer();
+                if (leaderBoards != null)
+                {
+                    foreach (LeaderBoardPlayer l in leaderBoards)
+                    {
+                        GameObject leaderBoardObj = Instantiate(leaderBoardPlayerListPrefab, parentLeaderBoardPlayerTransform);
+                        LeaderBoardPlayerUI leaderBoardUI = leaderBoardObj.GetComponent<LeaderBoardPlayerUI>();
+                        leaderBoardUI.SetLeaderBoard(l);
+                        leaderBoardPlayerViewList.Add(leaderBoardObj);
+                    }
+                }
+            }
+        }
+    }
+
+    public void ClearListLeaderBoardsPlayer()
+    {
+        foreach (GameObject l in leaderBoardPlayerViewList)
+        {
+            Destroy(l);
+        }
+    }
 
     public void SendGetAllLeaderBoards(string complemento)
     {
@@ -34,7 +81,7 @@ public class LeaderBoardRequest : MonoBehaviour
             {
                 Debug.Log("Resposta da API: " + uwr.downloadHandler.text);
                 List<LeaderBoard> leaderBoards = JsonConvert.DeserializeObject<List<LeaderBoard>>(uwr.downloadHandler.text);
-
+                ClearList();
                 if (leaderBoards != null)
                 {
                     foreach (LeaderBoard l in leaderBoards)

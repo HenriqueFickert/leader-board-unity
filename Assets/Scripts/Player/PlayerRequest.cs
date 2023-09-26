@@ -36,7 +36,7 @@ public class PlayerRequest : MonoBehaviour
             {
                 Debug.Log("Resposta da API: " + uwr.downloadHandler.text);
                 List<Player> players = JsonConvert.DeserializeObject<List<Player>>(uwr.downloadHandler.text);
-
+                ClearList();
                 if (players != null)
                 {
                     foreach (Player p in players)
