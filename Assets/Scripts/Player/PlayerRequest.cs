@@ -77,12 +77,12 @@ public class PlayerRequest : MonoBehaviour
 
         if (uwr.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log("Error: " + uwr.error);
-            Debug.Log("API Error Detail: " + uwr.downloadHandler.text);
+            Debug.Log("Erro na requisição: " + uwr.error);
+            Debug.Log("Detalhes do erro: " + uwr.downloadHandler.text);
         }
         else
         {
-            Debug.Log("API Response: " + uwr.downloadHandler.text);
+            Debug.Log("Resposta da API: " + uwr.downloadHandler.text);
             Player responseData = JsonConvert.DeserializeObject<Player>(uwr.downloadHandler.text);
         }
     }
