@@ -28,6 +28,7 @@ public class PlayerUI : MonoBehaviour
 
     private void DeletePlayer()
     {
+        Debug.Log(player.id);
         request.SentDeleteRequest(player.id);
     }
 
