@@ -24,5 +24,5 @@ public class LeaderBoardPlayer
 
     public DateTime criadoEm { get; set; }
 
-    public Player player { get; set; }
+    public string nome { get; set; }
 }

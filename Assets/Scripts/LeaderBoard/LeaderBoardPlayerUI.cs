@@ -21,7 +21,7 @@ public class LeaderBoardPlayerUI : MonoBehaviour
     private void SetUI()
     {
         idText.text = leaderBoard.id.ToString();
-        playerName.text = leaderBoard.player.nome.ToString();
+        playerName.text = leaderBoard.nome.ToString();
         scoreText.text = leaderBoard.score.ToString();
         criadoEmText.text = leaderBoard.criadoEm.ToString();
     }

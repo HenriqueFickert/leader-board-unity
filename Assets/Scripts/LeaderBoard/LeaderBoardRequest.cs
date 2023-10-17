@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 public class LeaderBoardRequest : MonoBehaviour
 {
-    protected string url = "http://18.231.80.118:3000/routes/leaderboard";
+    protected string url = "http://ec2-15-228-77-162.sa-east-1.compute.amazonaws.com:3000/routes/leaderboard";
 
     private List<LeaderBoard> leaderBoards = new List<LeaderBoard>();
     public GameObject leaderBoardListPrefab;

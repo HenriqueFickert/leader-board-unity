@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerRequest : MonoBehaviour
 {
-    protected string url = "http://18.231.80.118:3000/routes/player";
+    protected string url = "http://ec2-15-228-77-162.sa-east-1.compute.amazonaws.com:3000/routes/player";
 
     private List<Player> players = new List<Player>();
 
